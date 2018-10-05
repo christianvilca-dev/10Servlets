@@ -1,23 +1,35 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Servlet
+ * - Tecnologia de Java que permite la comunicacion via protocolo http entre el servidor y el cliente
+ * - Permiten recibir peticiones, manejarlas y darle una respuesta al cliente
+ * - En lo que se basan los framework's
+ * - Procesan el GET
+
+ * GET y POST 
+ * - Hacen lo mismo
+ * - Ambas viajan de forma plana
+ * GET 
+ * - Los parametros se envian en la url (Solicitud a una pagina)
+ * POST
+ * - Los parametros se envian en el cuerpo de la solicitud
+ * - Se envia mas informacion en el request
+ * - Antes se creia que protegia la informacion ( para hacerlo su usa el HTTPS)
  */
 package pe.christian.servlets;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.io.IOException; // Para poder escribir en disco duro algunas cosas
+import java.io.PrintWriter; // Nos permite devolver una respuesta escrita
+import javax.servlet.ServletException; // Excepcion del servlet
+import javax.servlet.annotation.WebServlet; // Nos evita escribir la informacion del servlet en el archivo web.xml
+import javax.servlet.http.HttpServlet; // Clase en la que heredan los servlet
+import javax.servlet.http.HttpServletRequest; // Solicitudes del cliente desde el html
+import javax.servlet.http.HttpServletResponse; // Respuestas al cliente
 
 /**
  *
  * @author Christian
  */
-@WebServlet(name = "PrimerServlet", urlPatterns = {"/PrimerServlet"})
+@WebServlet(name = "PrimerServlet", urlPatterns = {"/PrimerServlet"}) // Notacion que nos permite 
 public class PrimerServlet extends HttpServlet {
 
     /**
@@ -31,8 +43,14 @@ public class PrimerServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        response.setContentType("text/html;charset=UTF-8"); // Tipo de contenido (respuesta)
+        
+        // Captura el valor del paramentro /PrimerServlet?nombre=55
+        String nombre = request.getParameter("nombre");
+        
+        // En este try ya no es necesario el finally, por lo que se cierra automaticamente
+        // Siempre y cuando se cree la clase autocerrable
+        try (PrintWriter out = response.getWriter()) { // Se crea el objeto en el que se escribirá
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -40,7 +58,7 @@ public class PrimerServlet extends HttpServlet {
             out.println("<title>Servlet PrimerServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PrimerServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Hola " + nombre + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
