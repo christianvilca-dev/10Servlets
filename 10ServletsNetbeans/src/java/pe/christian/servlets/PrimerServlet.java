@@ -41,10 +41,12 @@ public class PrimerServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    // Sin importar si es GET o POST hace el mismo procedimiento
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8"); // Tipo de contenido (respuesta)
-        
+        //response.setCharacterEncoding("UTF-8"); 
+        request.setCharacterEncoding("UTF-8"); // Para capturar caracteres especiales o la ñ
         // Captura el valor del paramentro /PrimerServlet?nombre=55
         String nombre = request.getParameter("nombre");
         
