@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * - El servlet inicia al momento de llamarlo por primera vez (nacio)
+ * - Creamos una instancia de esta primera solicitud y se va llamando a los metodos tantas veces sea necesario
+     tanto el metodo GET y el POST a ese solo objeto
+ * - No se crea una instancia cada vez que se hace la misma solicitud
  */
 package pe.christian.servlets;
 

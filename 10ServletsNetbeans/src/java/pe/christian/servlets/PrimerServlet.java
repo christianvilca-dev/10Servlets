@@ -49,7 +49,8 @@ public class PrimerServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8"); // Para capturar caracteres especiales o la ñ
         // Captura el valor del paramentro /PrimerServlet?nombre=55
         String nombre = request.getParameter("nombre");
-        
+        // Lee el valor del archivo web.xml
+        String base = (String)getServletContext().getAttribute("bd");
         // En este try ya no es necesario el finally, por lo que se cierra automaticamente
         // Siempre y cuando se cree la clase autocerrable
         try (PrintWriter out = response.getWriter()) { // Se crea el objeto en el que se escribirá
@@ -61,6 +62,7 @@ public class PrimerServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Hola " + nombre + "</h1>");
+            out.println("<h2>La base de datos es: " + base + "</h2>");
             out.println("</body>");
             out.println("</html>");
         }
